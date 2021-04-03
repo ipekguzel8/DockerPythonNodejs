@@ -1,0 +1,30 @@
+services:
+  pythonapp:
+    build: ./dockerpython
+    ports:
+      - "4444:80"
+    container_name: 'app1'
+    networks:
+      - proxy
+
+  nodejsapp:
+    build: ./dockernodejs
+    ports: 
+      - "5555:80"
+    container_name: 'app2'
+    networks:
+      - proxy
+
+  load_balancer:
+    image: haproxy:2.3
+    volumes:
+      - "./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+    ports:
+      - "8888:8888"
+    networks:
+      - proxy
+    container_name: 'haproxy'
+networks:
+  proxy:
+    
+
