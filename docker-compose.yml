@@ -26,5 +26,6 @@ services:
     container_name: 'haproxy'
 networks:
   proxy:
+    driver: bridge
     
 
